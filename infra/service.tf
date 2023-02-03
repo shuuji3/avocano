@@ -2,6 +2,8 @@ resource "google_cloud_run_service" "server" {
   name                       = var.service_name
   location                   = var.region
   autogenerate_revision_name = true
+  labels                     = var.labels
+
   template {
     spec {
       service_account_name = google_service_account.server.email

@@ -2,6 +2,8 @@ resource "google_storage_bucket" "media" {
   name          = "media-${var.project}"
   location      = "us-central1"
   storage_class = "REGIONAL"
+
+  labels = var.labels
 }
 
 data "google_iam_policy" "mediaaccess" {

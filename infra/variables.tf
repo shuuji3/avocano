@@ -21,9 +21,9 @@ variable "service_name" {
   description = "Cloud Run service name"
 }
 
-variable "server_image" { 
-  type = string
-  default = "gcr.io/avocano/server"
+variable "server_image" {
+  type        = string
+  default     = "gcr.io/avocano/server"
   description = "Server image"
 }
 
