@@ -7,7 +7,7 @@ resource "random_password" "django_admin_password" {
 }
 
 resource "google_secret_manager_secret" "django_admin_password" {
-  secret_id = "django_admin_password"
+  secret_id = var.random_suffix ? "django_admin_password-${random_id.suffix.hex}" : "django_admin_password"
   replication {
     automatic = true
   }
@@ -32,7 +32,7 @@ resource "random_password" "django_secret_key" {
   length  = 50
 }
 resource "google_secret_manager_secret" "django_settings" {
-  secret_id = "django_settings"
+  secret_id = var.random_suffix ? "django_settings-${random_id.suffix.hex}" : "django_settings"
   replication {
     automatic = true
   }
