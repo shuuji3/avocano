@@ -1,5 +1,5 @@
 resource "google_cloud_run_service" "server" {
-  name                       = var.service_name
+  name                       = var.random_suffix ? "${var.service_name}-${random_id.suffix.hex}" : var.service_name
   location                   = var.region
   autogenerate_revision_name = true
   labels                     = var.labels

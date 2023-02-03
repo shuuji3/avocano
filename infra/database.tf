@@ -3,7 +3,7 @@
 ## Instance
 
 resource "google_sql_database_instance" "postgres" {
-  name             = var.instance_name
+  name             = var.random_suffix ? "${var.instance_name}-${random_id.suffix.hex}" : var.instance_name
   database_version = "POSTGRES_14"
   project          = var.project
   region           = var.region
@@ -18,7 +18,7 @@ resource "google_sql_database_instance" "postgres" {
 
 ## Database
 resource "google_sql_database" "database" {
-  name     = var.database_name
+  name     = var.random_suffix ? "${var.database_name}-${random_id.suffix.hex}" : var.database_name
   instance = google_sql_database_instance.postgres.name
 }
 
@@ -26,7 +26,7 @@ resource "google_sql_database" "database" {
 ## Details used in Django config settings
 # NOTE: users created this way automatically gain cloudsqladmin rights.
 resource "google_sql_user" "django" {
-  name     = var.database_username
+  name     = var.random_suffix ? "${var.database_username}-${random_id.suffix.hex}" : var.database_username
   instance = google_sql_database_instance.postgres.name
   password = random_password.database_user_password.result
 }

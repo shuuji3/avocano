@@ -1,8 +1,9 @@
 resource "google_cloud_run_v2_job" "setup" {
-
-  name         = "setup"
+  name         = var.random_suffix ? "setup-${random_id.suffix.hex}" : "setup"
   location     = var.region
   launch_stage = "BETA"
+
+  labels = var.labels
 
   template {
     template {
@@ -44,11 +45,11 @@ resource "google_cloud_run_v2_job" "setup" {
 }
 
 resource "google_cloud_run_v2_job" "migrate" {
-
-
-  name         = "migrate"
+  name         = var.random_suffix ? "migrate-${random_id.suffix.hex}" : "migrate"
   location     = var.region
   launch_stage = "BETA"
+
+  labels = var.labels
 
   template {
     template {

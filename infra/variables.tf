@@ -44,3 +44,15 @@ variable "labels" {
   description = "A set of key/value label pairs to assign to the resources deployed by this blueprint."
   default     = {}
 }
+
+variable "random_suffix" {
+  description = "Add random suffix to VM name"
+  type        = string
+  default     = true
+}
+
+resource "random_id" "suffix" {
+  byte_length = 2
+}
+
+
