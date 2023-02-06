@@ -2,7 +2,6 @@ resource "google_cloud_run_service" "server" {
   name                       = var.random_suffix ? "${var.service_name}-${random_id.suffix.hex}" : var.service_name
   location                   = var.region
   autogenerate_revision_name = true
-  labels                     = var.labels
 
   template {
     spec {
@@ -21,6 +20,7 @@ resource "google_cloud_run_service" "server" {
       }
     }
     metadata {
+      labels = var.labels
       annotations = {
         "autoscaling.knative.dev/maxScale"      = "100"
         "run.googleapis.com/cloudsql-instances" = google_sql_database_instance.postgres.connection_name

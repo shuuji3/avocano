@@ -9,7 +9,7 @@ resource "google_cloud_run_v2_job" "setup" {
     template {
       service_account = google_service_account.automation.email
       containers {
-        image   = data.google_container_registry_image.server.image_url
+        image   = var.server_image
         command = ["setup"]
         env {
           name = "DJANGO_ENV"
@@ -55,7 +55,7 @@ resource "google_cloud_run_v2_job" "migrate" {
     template {
       service_account = google_service_account.automation.email
       containers {
-        image   = data.google_container_registry_image.server.image_url
+        image   = var.server_image
         command = ["migrate"]
         env {
           name = "DJANGO_ENV"

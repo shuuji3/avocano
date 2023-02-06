@@ -7,10 +7,10 @@ resource "google_sql_database_instance" "postgres" {
   database_version = "POSTGRES_14"
   project          = var.project
   region           = var.region
-  labels           = var.labels
 
   settings {
-    tier = "db-custom-2-4096" # 2 CPU, 4GB Memory
+    tier        = "db-custom-2-4096" # 2 CPU, 4GB Memory
+    user_labels = var.labels
   }
   depends_on = [google_project_service.enabled]
 
