@@ -24,11 +24,16 @@ export const getProduct = async productId => {
   const { API_URL } = getConfig();
   let product;
 
+  var credentials = 'include';
+  if (API_URL.includes('//localhost')) {
+    credentials = 'omit';
+  }
+
   if (productId) {
     try {
       const response = await fetch(`${API_URL}/products/${productId}`, {
         method: 'GET',
-        credentials: 'include',
+        credentials: credentials,
       });
       product = await response.json();
     } catch (e) {
@@ -51,10 +56,15 @@ export const getActiveProduct = async () => {
   const { API_URL } = getConfig();
   let activeProduct;
 
+  var credentials = 'include';
+  if (API_URL.includes('//localhost')) {
+    credentials = 'omit';
+  }
+
   try {
     const response = await fetch(`${API_URL}/active/product/`, {
       method: 'GET',
-      credentials: 'include',
+      credentials: credentials,
     });
     activeProduct = await response.json();
   } catch (e) {
@@ -73,11 +83,16 @@ export const getActiveProduct = async () => {
 export const buyProduct = async (productId, callback) => {
   const { API_URL } = getConfig();
 
+  var credentials = 'include';
+  if (API_URL.includes('//localhost')) {
+    credentials = 'omit';
+  }
+
   if (productId) {
     try {
       await fetch(`${API_URL}/products/${productId}/purchase/`, {
         method: 'POST',
-        credentials: 'include',
+        credentials: credentials,
       });
       callback && callback();
     } catch (e) {
@@ -98,13 +113,18 @@ export const getProductTestimonials = async productId => {
   const { API_URL } = getConfig();
   let testimonials = [];
 
+  var credentials = 'include';
+  if (API_URL.includes('//localhost')) {
+    credentials = 'omit';
+  }
+
   if (productId) {
     try {
       const response = await fetch(
         `${API_URL}/testimonials/?product_id=${productId}`,
         {
           method: 'GET',
-          credentials: 'include',
+          credentials: credentials,
         }
       );
       testimonials = response.json();
@@ -128,10 +148,15 @@ export const getProductList = async () => {
   const { API_URL } = getConfig();
   let products;
 
+  var credentials = 'include';
+  if (API_URL.includes('//localhost')) {
+    credentials = 'omit';
+  }
+
   try {
     const response = await fetch(`${API_URL}/products/`, {
       method: 'GET',
-      credentials: 'include',
+      credentials: credentials,
     });
     products = await response.json();
   } catch (e) {
@@ -151,10 +176,15 @@ export const getSiteConfig = async () => {
   const { API_URL } = getConfig();
   let config;
 
+  var credentials = 'include';
+  if (API_URL.includes('//localhost')) {
+    credentials = 'omit';
+  }
+
   try {
     const response = await fetch(`${API_URL}/active/site_config/`, {
       method: 'GET',
-      credentials: 'include',
+      credentials: credentials,
     });
     config = await response.json();
   } catch (e) {
